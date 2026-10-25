@@ -1,0 +1,4 @@
+*.keystore
+*.log
+build/
+out/

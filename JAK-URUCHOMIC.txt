@@ -1,0 +1,11 @@
+SIECI KOMPUTEROWE – QUIZ NA KOLOKWIUM
+
+Komputer (Windows / Linux / macOS):
+  1. Zainstaluj Javę 11 lub nowszą (jeśli jeszcze jej nie ma).
+  2. Kliknij dwukrotnie SieciQuiz-desktop.jar
+     albo w terminalu:  java -jar SieciQuiz-desktop.jar
+  3. Quiz otworzy się w przeglądarce (http://localhost:8765).
+     Zamknij małe okno programu, aby go wyłączyć.
+  Postępy zapisują się w przeglądarce na danym komputerze.
+
+Telefon z Androidem: zainstaluj SieciQuiz.apk (zezwól na instalację z nieznanych źródeł).
