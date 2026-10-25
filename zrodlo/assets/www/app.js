@@ -251,10 +251,22 @@
     { q: "C2. Jaki maksymalny zasięg należy projektować dla sieci 10GigabitEthernet?",
       a: "Na skrętce 55 m (wg skryptu C-01, zarówno poziomo, jak i pionowo). Dla porównania: Fast/GigabitEthernet 100 m (90 m + patchcordy 2×5 m), pion 90 m; światłowód w pionie do 2000 m." },
     { q: "C3. Jaką minimalną długość może mieć patchcord i z czego to wynika?",
-      a: "W wyjściówce podano 1 m. Powód: w bardzo krótkim kablu odbicia (return loss) i przesłuchy (NEXT) na złączach RJ-45 obu końców nie zdążają się wytłumić i nakładają się, powodując błędy transmisji; ponadto trudno zachować promień gięcia 4D i luz kabla.\n(Uwaga: tej wartości nie ma wprost w materiałach – sprawdź to u prowadzącego.)" }
+      a: "W wyjściówce podano 1 m. Powód: w bardzo krótkim kablu odbicia (return loss) i przesłuchy (NEXT) na złączach RJ-45 obu końców nie zdążają się wytłumić i nakładają się, powodując błędy transmisji; ponadto trudno zachować promień gięcia 4D i luz kabla.\n(Uwaga: tej wartości nie ma wprost w materiałach – sprawdź to u prowadzącego.)" },
+    { tag: "wyjściówka 2.2", q: "2.2 L1. W jakich jednostkach podajemy wysokość szaf krosowniczych?",
+      a: "W jednostkach rack, U (rack unit). 1U = 4,445 cm (1 ¾\"). Pojemność szafy to wielokrotność U (np. 42U), urządzenia zajmują 1U, 2U itd. Szerokość montażowa to 19\" (EIA-310-D)." },
+    { tag: "wyjściówka 2.2", q: "2.2 L2. Co to jest i gdzie stosujemy KVM?",
+      a: "KVM (Keyboard Video Mouse) – przełącznik pozwalający obsługiwać dwa lub więcej komputerów z jednego zestawu klawiatury, myszy i monitora. Stosowany w szafach rack/krosowniczych i serwerowniach; w wersji rack zajmuje zwykle 1U, są też wersje desktop." },
+    { tag: "wyjściówka 2.2", q: "2.2 L3. W jakiej topologii sieci występuje T-connector? Wymień inne elementy tej sieci.",
+      a: "W topologii magistrali (bus) – Ethernet na kablu koncentrycznym 10BASE2 (do 185 m, 10 Mb/s). Elementy: kabel koncentryczny (RG-58), T-connectory (trójniki BNC), złącza BNC, terminatory na obu końcach magistrali, karty sieciowe z gniazdem BNC, ewentualnie repeatery.\n(Uzupełnienie – brak w skryptach.)" },
+    { tag: "wyjściówka 2.2", q: "2.2 C1. Z jaką strukturą sieci kojarzy się wysyłanie pakietów różnymi drogami?",
+      a: "Z siecią WAN o topologii siatki (niepełnej) z routerami w węzłach: wiadomość jest dzielona na pakiety, a każdy dociera do adresata drogą optymalną w danej chwili (w przeciwieństwie do sieci telefonicznej, gdzie centrale zestawiają jedno łącze na czas rozmowy)." },
+    { tag: "wyjściówka 2.2", q: "2.2 C2. Które urządzenia sieci lokalnej decydują o wyborze drogi pakietu do adresata?",
+      a: "Routery – wybór trasy między sieciami (warstwa 3, adresy IP).\nPrzełączniki – wybór portu na podstawie tablicy adresów MAC (warstwa 2); nieznany adres → ramka na wszystkie porty poza źródłowym.\nKoncentrator nie decyduje – powtarza sygnał na wszystkie porty (warstwa 1)." },
+    { tag: "wyjściówka 2.2", q: "2.2 C3. Co to jest repeater i w jakich strukturach sieci go spotykamy, a gdzie nie występuje?",
+      a: "Repeater (wzmacniak) – urządzenie warstwy fizycznej, które wzmacnia i regeneruje sygnał, wydłużając segment ponad limit długości (np. 185 m dla 10BASE2, 100 m dla skrętki). Nie analizuje ramek ani adresów.\nSpotykany: w magistrali na koncentryku, w długich łączach, hub to wieloportowy repeater.\nNie występuje: w sieciach przełączanych i routowanych (switch i router same regenerują sygnał, dzielą sieć na segmenty), np. w nowoczesnych LAN i w WAN z routerami.\n(Uzupełnienie – brak w skryptach.)" }
   ];
   function flash() {
-    var cards = WY.map(function (w) { return { q: w.q, a: w.a, tag: "wyjściówka" }; });
+    var cards = WY.map(function (w) { return { q: w.q, a: w.a, tag: w.tag || "wyjściówka 1.1" }; });
     shuffle(Q).forEach(function (x) { cards.push({ q: x.q, a: x.c.join("; ") + (x.e ? "\n\n" + x.e : ""), img: x.img, tag: TOPICS[x.t].name }); });
     var i = 0, open = false;
     go("Fiszki", function (root) {
@@ -302,6 +314,8 @@
         '<div class="card"><h2>Klasy i kategorie</h2><table><tr><th>Klasa</th><th>Kat.</th><th>MHz</th></tr><tr><td>D</td><td>5</td><td>100</td></tr><tr><td>E</td><td>6</td><td>250</td></tr><tr><td>EA</td><td>6A</td><td>500</td></tr><tr><td>F</td><td>7</td><td>600</td></tr><tr><td>FA</td><td>7A</td><td>1000</td></tr><tr><td>I / II</td><td>8.1 / 8.2</td><td>2000</td></tr></table></div>' +
 
         '<div class="card"><h2>Punkty dystrybucyjne</h2><p>PCS – punkt centralny sieci · CPD – centralny · BPD – budynkowy · KPD – kondygnacyjny · LPD – lokalny.<br>Metoda angielska: MDF (główny) i IDF (pośredni).</p></div>' +
+
+        '<div class="card"><h2>Rack i urządzenia</h2><p>1U = 4,445 cm (1 ¾"), szerokość 19" (EIA-310-D). KVM – 1 klawiatura/mysz/monitor na wiele komputerów (zwykle 1U). Serwerownia: ok. 45% wilgotności, 20 °C, UPS, kolokacja.<br>Hub – warstwa 1, jedna domena kolizyjna, bit po bicie. Switch – warstwa 2, tablica MAC, domena kolizyjna = port, dupleks. Repeater – regeneruje sygnał (warstwa 1). Router – trasy IP (warstwa 3). Patch panel – element pasywny (12/16/24/48 × 8P8C). T-connector + terminatory = magistrala 10BASE2.</p></div>' +
 
         '<div class="card"><h2>IPv6</h2><p>128 bitów, 8 grup hex po 16 bitów. ::1/128 loopback · ::/128 zerowy · fe80::/10 link-local · ff00::/8 multicast · ::ffff:0:0/96 mapowanie IPv4. Typy: unicast, anycast, multicast.</p></div>' +
 

@@ -1,8 +1,8 @@
 # Sieci komputerowe – Quiz na kolokwium
 
-Aplikacja do nauki na kolokwium z przedmiotu **Sieci komputerowe** (materiały: wykład 1, ćwiczenia 1–2, laboratorium 1, wyjściówka 1.1).
+Aplikacja do nauki na kolokwium z przedmiotu **Sieci komputerowe** (materiały: wykład 1, ćwiczenia 1–2, laboratorium 1–2, wyjściówki 1.1 i 2.2).
 
-- 245 pytań w 9 tematach, z wyjaśnieniami i źródłem
+- 287 pytań w 11 tematach (w tym szafy rack, KVM, serwerownia, switch/hub/repeater), z wyjaśnieniami i źródłem
 - grafiki z materiałów (topologie, okablowanie, T568A/B, klasy IP, VLSM)
 - egzamin próbny (20 pytań, ocena orientacyjna), nauka według tematu, powtórka błędów
 - generator zadań z adresacji IP, kalkulator podsieci, fiszki (w tym wyjściówka), ściąga

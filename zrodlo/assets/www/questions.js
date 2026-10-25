@@ -9,7 +9,9 @@ var TOPICS = {
   utp:   { name: "Skrętka UTP, T568A/B, diagnostyka (lab)", icon: "🔌" },
   ip4:   { name: "Adresacja IPv4: klasy i zasady", icon: "🔢" },
   podsieci: { name: "Podsieci, nadsieci, CIDR, VLSM", icon: "✂️" },
-  ip6:   { name: "Adresacja IPv6", icon: "🌐" }
+  ip6:   { name: "Adresacja IPv6", icon: "🌐" },
+  rack:  { name: "Szafy rack, KVM, serwerownia (L-02)", icon: "🖥️" },
+  urz:   { name: "Urządzenia: switch, hub, repeater, patch panel", icon: "🔀" }
 };
 var Q = [];
 function q(t, text, c, w, e, x) {
@@ -406,3 +408,75 @@ q("ip6", "Do czego służy pula ::ffff:0:0/96?", "To adresy kompatybilne z adres
 q("ip6", "Jak obecnie przesyła się ruch IPv6 przez sieć opartą na IPv4?", "Tuneluje się go w IPv4", ["Zamienia adresy MAC", "Używa wyłącznie NAT", "Nie da się tego zrobić"], "", { src: "C-02" });
 q("ip6", "Jak skrócić adres 2001:0db8:0000:0000:0000:0000:0000:0001?", "2001:db8::1", ["2001:db8:1", "2001:db8:::1", "2001::0db8::1"], "Ciąg zer można zastąpić „::” tylko raz; zera wiodące w grupach można pominąć. (Uzupełnienie)", { src: "C-02" });
 q("ip6", "Ile razy w adresie IPv6 można użyć skrótu „::”?", "Tylko raz", ["Dowolnie wiele razy", "Dwa razy", "Wcale"], "(Uzupełnienie)", { src: "C-02" });
+
+/* ================= LAB 2: SZAFY RACK, KVM, SERWEROWNIA ================= */
+q("rack", "W jakich jednostkach podajemy wysokość szaf krosowniczych (rack)?", "w jednostkach U (rack unit)", ["w calach (cale na metr)", "w jednostkach RU/h (kilogramach na półkę)", "w centymetrach, bo U nie jest znormalizowane"],
+  "Wysokość konstrukcji, a więc jej pojemność, określa się jako wielokrotność jednostek U (np. szafa 42U). 1U = 4,445 cm (1 ¾\").", { img: "rack-szafy", src: "L-02 / wyjściówka 2.2" });
+q("rack", "Ile wynosi wysokość jednej jednostki U?", "4,445 cm (1 ¾ cala)", ["2,54 cm (1 cal)", "5 cm", "10 cm"], "", { src: "L-02" });
+q("rack", "Jaka jest standardowa szerokość sprzętu w szafach rack?", "19 cali", ["10 cali", "24 cale", "30 cm"],
+  "Istnieją też wersje 10\" i 24\" (produkowane przez IBM, np. dla serwerów RS/6000).", { src: "L-02" });
+q("rack", "Jaki dokument organizacji EIA opisuje zalecenia dotyczące budowy i wymiarów szaf rack?", "EIA-310-D", ["EIA/TIA-568", "ISO/IEC 11801", "PN-EN 50174"], "EIA – Electronic Industries Association.", { src: "L-02" });
+q("rack", "Gdzie stosuje się szafy RACK?",
+  ["serwerownie komputerowe", "teletechnika", "energetyka", "studia nagraniowe"], ["wyłącznie w budynkach mieszkalnych", "tylko w samochodach"], "Także w pomieszczeniach przemysłowych.", { src: "L-02" });
+q("rack", "Z czego składa się zestaw mocujący do montażu urządzeń w szafie rack?",
+  "ze śruby M6, kwadratowej nakrętki klatkowej i podkładki", ["z wkrętów do drewna i kołków", "z klamry plastikowej i opaski zaciskowej", "ze śruby M12 i nakrętki sześciokątnej"],
+  "Nakrętkę (koszyczek) umieszcza się od wewnętrznej strony profili RACK w kwadratowym otworze, po czym przykręca się śrubą z podkładką.", { img: "zestaw-rack", src: "L-02" });
+q("rack", "Jak montuje się nakrętkę klatkową („koszyczek”) w szafie?", "od wewnętrznej strony profilu, w kwadratowym otworze", ["od zewnątrz, w otworze okrągłym", "przyspawa się ją do profilu", "nie montuje się, wkręca się śrubę bezpośrednio w blachę"], "", { img: "zestaw-rack", src: "L-02" });
+q("rack", "Po co serwery, macierze i urządzenia KVM dostarcza się z szynami?", "Aby można je było wysunąć z szafy bez odkręcania", ["Aby zwiększyć ich wytrzymałość na wstrząsy", "Aby łatwiej je chłodzić", "Aby zmniejszyć ich wysokość do 1U"], "", { src: "L-02" });
+q("rack", "Co to jest KVM?",
+  "Przełącznik umożliwiający podłączenie dwóch lub więcej komputerów do jednego zestawu klawiatury, myszy i monitora", ["Kabel światłowodowy o zasięgu do 2 km", "Protokół zarządzania pamięcią wirtualną", "Rodzaj zasilacza awaryjnego"],
+  "KVM = Keyboard Video Mouse. Odpowiedź na L2 z wyjściówki 2.2.", { img: "kvm", src: "L-02 / wyjściówka 2.2" });
+q("rack", "Gdzie stosuje się przełączniki KVM i ile miejsca zajmują w szafie?", "w szafach komputerowych i krosowniczych; w wersji rack zwykle 1U", ["tylko w domach, zajmują 10U", "tylko w sieciach WAN, zajmują 42U", "w wersji desktop wyłącznie, nie ma wersji rack"],
+  "Są też dostępne wersje desktop.", { img: "kvm", src: "L-02" });
+q("rack", "Co przedstawia zdjęcie?", "Listwę zasilającą 230 V do szafy rack", ["Organizator kabli", "Patch panel", "Przełącznik KVM"], "", { img: "listwa", src: "L-02" });
+q("rack", "Co przedstawia zdjęcie?", "Poziomy organizator kabli", ["Listwę zasilającą", "Panel krosowniczy 24-portowy", "Zestaw mocujący rack"], "Służy do porządkowania kabli w szafie (prowadnice, przepusty, uchwyty).", { img: "organizator", src: "L-02" });
+q("rack", "Jak zapewnia się chłodzenie urządzeń w szafach rack?",
+  ["klimatyzacja pomieszczenia serwerowego", "drzwi perforowane umożliwiające wentylację", "pojedyncze wentylatory lub gotowe panele wentylacyjne"], ["zamykanie szafy hermetycznie", "wyłączanie sprzętu co godzinę"], "", { img: "rack-szafy", src: "L-02" });
+q("rack", "Co to jest serwerownia?",
+  "Wydzielone pomieszczenie z komputerami-serwerami oraz aktywnymi i pasywnymi elementami sieci, umieszczonymi najczęściej w szafach rack", ["Pomieszczenie wyłącznie na kable zapasowe", "Biuro administratora sieci", "Szafa z zasilaczami UPS"], "", { img: "serwerownia", src: "L-02" });
+q("rack", "Jakie parametry mikroklimatu powinny być utrzymywane w serwerowni?", "wilgotność ok. 45% i temperatura ok. 20 °C", ["wilgotność 90% i temperatura 35 °C", "wilgotność 10% i temperatura 0 °C", "wilgotność 60% i temperatura 30 °C"], "", { src: "L-02" });
+q("rack", "Jak serwerownia utrzymuje ciągłość pracy?",
+  ["dwa lub więcej źródeł zasilania", "systemy zasilania awaryjnego UPS", "kilka łączy do różnych dostawców internetu"], ["jedno łącze, żeby było taniej", "wyłączanie serwerów w nocy"], "", { src: "L-02" });
+q("rack", "Do czego służą podłogi technologiczne (podniesione, modularne) w serwerowni?", "Ułatwiają prowadzenie okablowania do szaf rack", ["Zwiększają temperaturę w pomieszczeniu", "Służą wyłącznie do ozdoby", "Zastępują szafy rack"], "", { src: "L-02" });
+q("rack", "Po co w serwerowni stosuje się dywany i maty specjalnego typu?", "Zapobiegają gromadzeniu się ładunków elektrostatycznych", ["Tłumią hałas wentylatorów", "Chronią przed zalaniem", "Izolują termicznie szafy"], "", { src: "L-02" });
+q("rack", "Co to jest kolokacja?", "Odpłatne umieszczenie własnych serwerów w profesjonalnej serwerowni", ["Podwójne zasilanie serwerów", "Łączenie dwóch sieci w jedną", "Kopia zapasowa na taśmie"],
+  "Małe firmy wybierają ją, bo własna serwerownia wymaga wysokich inwestycji (klimatyzacja, podwójne zasilanie, nośność podłogi pod akumulatory UPS).", { src: "L-02" });
+
+/* ================= URZĄDZENIA: SWITCH, HUB, REPEATER, PATCH PANEL ================= */
+q("urz", "W której warstwie modelu ISO/OSI pracuje przełącznik (switch)?", "w drugiej – łącza danych", ["w pierwszej – fizycznej", "w trzeciej – sieci", "w siódmej – aplikacji"], "", { src: "L-02" });
+q("urz", "W której warstwie modelu ISO/OSI pracuje koncentrator (hub)?", "w pierwszej – fizycznej", ["w drugiej – łącza danych", "w trzeciej – sieci", "w czwartej – transportowej"], "Nie analizuje adresów MAC ani IP.", { src: "L-02" });
+q("urz", "Który producent wprowadził pierwszy przełącznik ethernetowy (1990 r.)?", "Kalpana", ["Cisco", "IBM", "Intel"], "", { src: "L-02" });
+q("urz", "Dlaczego przełącznik nazywa się „wieloportowym mostem” lub „inteligentnym koncentratorem”?",
+  "Przekazuje ramki tylko do docelowego segmentu (jak most), łączy wiele segmentów w gwiazdę (jak hub) i działa w trybie dupleks", ["Bo działa tylko w warstwie fizycznej", "Bo wymaga zasilania PoE", "Bo ma tylko dwa porty"], "", { src: "L-02" });
+q("urz", "Co zawiera tablica skojarzeń przełącznika?", "adresy MAC i odpowiadające im porty", ["adresy IP i nazwy domenowe", "adresy IP i maski podsieci", "trasy do sieci zdalnych"],
+  "Tablica może zawierać 4096, 8192 lub 16384 wpisów; wpis wygasa, jeśli przez określony czas nie napływają ramki z danego MAC.", { src: "L-02" });
+q("urz", "Do czego przełącznik wykorzystuje adres MAC nadawcy przychodzącej ramki?", "Do prowadzenia (uczenia się) tablicy skojarzeń MAC–port", ["Do szyfrowania ramki", "Do przydzielania adresów IP", "Do obliczania sumy kontrolnej"], "", { src: "L-02" });
+q("urz", "Co zrobi przełącznik, gdy adresu MAC odbiorcy nie ma w tablicy skojarzeń?", "Wyśle ramkę na wszystkie porty z wyjątkiem źródłowego", ["Odrzuci ramkę", "Wyśle ramkę tylko do routera", "Wyśle ramkę z powrotem do nadawcy"],
+  "Gdy adres jest znany, ramka idzie tylko na port wskazany w tablicy.", { src: "L-02" });
+q("urz", "Dlaczego wpisy w tablicy skojarzeń mają ograniczony czas ważności?", "Aby przełącznik dostosowywał się do zmian w sieci", ["Aby oszczędzać prąd", "Aby ukryć adresy MAC", "Aby ograniczyć prędkość portów"], "", { src: "L-02" });
+q("urz", "Domena kolizyjna w sieci z przełącznikiem to:", "pojedynczy port", ["cały przełącznik", "cała sieć LAN", "pojedynczy komputer w innej sieci"],
+  "Każdy host ma osobny kanał transmisyjny. W przypadku koncentratora domena kolizyjna jest jedna, wspólna.", { src: "L-02" });
+q("urz", "Ile domen kolizyjnych tworzy koncentrator (hub)?", "jedną wspólną", ["po jednej na port", "dwie", "żadnej"], "Hub powtarza każdy sygnał na wszystkie porty.", { src: "L-02" });
+q("urz", "Czym różni się przekazywanie w hubie i w przełączniku?", "Hub przenosi sygnał bit po bicie, przełącznik ramka po ramce (co wprowadza opóźnienia zależne od długości ramki)", ["Hub przekazuje ramki, a switch pojedyncze bity", "Nie różnią się", "Hub działa w trybie dupleks, switch tylko simpleks"], "", { src: "L-02" });
+q("urz", "Który z tych elementów pracuje w trybie dupleks?", "przełącznik (switch)", ["koncentrator (hub)", "repeater", "oba urządzenia"], "", { src: "L-02" });
+q("urz", "Do jakiej topologii służy koncentrator (hub)?", "gwiazdy", ["magistrali", "pierścienia", "siatki"], "Fizycznie gwiazda, logicznie magistrala.", { src: "L-02" });
+q("urz", "Patch panel (panel krosowniczy) jest elementem:", "pasywnym", ["aktywnym", "programowym", "bezprzewodowym"], "Stanowi zakończenie okablowania strukturalnego.", { src: "L-02" });
+q("urz", "Ile gniazd 8P8C najczęściej ma panel krosowniczy?", "12, 16, 24 lub 48", ["2, 4 lub 8", "3, 5 lub 7", "100 lub 200"], "", { src: "L-02" });
+q("urz", "Do czego podłącza się tył, a do czego przód panelu krosowniczego?", "Tył – na stałe przewody do gniazdek w budynku; przód – patchcordami do urządzeń sieciowych", ["Tył – patchcordy, przód – kable stałe", "Tył – zasilanie, przód – światłowody", "Wszystko od przodu"],
+  "Dzięki panelowi można łatwo zarządzać architekturą sieci.", { src: "L-02" });
+
+/* ================= WYJŚCIÓWKA 2.2 (T-connector, repeater, struktury) ================= */
+q("klas", "W jakiej topologii występuje T-connector?", "w topologii magistrali (sieć Ethernet na kablu koncentrycznym, np. 10BASE2)", ["w topologii gwiazdy", "w topologii pierścienia światłowodowego", "w topologii siatki WAN"],
+  "L3 z wyjściówki 2.2. T-connector (trójnik BNC) wpina się w kartę sieciową i łączy kable do sąsiednich stacji. (Uzupełnienie – nie ma tego w skryptach.)", { img: "topo-magistrala", src: "wyjściówka 2.2" });
+q("klas", "Jakie elementy tworzą sieć 10BASE2 (magistrala na cienkim koncentryku)?",
+  ["kabel koncentryczny", "T-connectory", "złącza BNC", "terminatory na końcach magistrali"], ["panel krosowniczy z gniazdami RJ-45", "przełącznik zarządzalny", "światłowód jednomodowy"],
+  "Zasięg segmentu 185 m, 10 Mb/s. (Uzupełnienie.)", { src: "wyjściówka 2.2" });
+q("klas", "Po co na końcach magistrali koncentrycznej stosuje się terminatory?", "Pochłaniają sygnał, zapobiegając jego odbiciom na końcach kabla", ["Zasilają karty sieciowe", "Zwiększają zasięg do 500 m", "Rozdzielają sieć na dwie podsieci"], "(Uzupełnienie.)", { src: "wyjściówka 2.2" });
+q("klas", "Z jaką strukturą sieci kojarzy się wysyłanie pakietów różnymi drogami?", "z siecią WAN o topologii siatki (niepełnej) z routerami w węzłach", ["z magistralą", "z pierścieniem", "z gwiazdą z hubem"],
+  "C1 z wyjściówki 2.2. Wiadomość dzielona jest na pakiety, a każdy dociera do adresata drogą optymalną w danej chwili.", { img: "topo-siatka", src: "W-01 / wyjściówka 2.2" });
+q("urz", "Które urządzenia sieci lokalnej decydują o wyborze drogi (portu) do adresata?", ["routery", "przełączniki (switche)"], ["koncentratory (huby)", "repeatery", "panele krosownicze"],
+  "C2 z wyjściówki 2.2. Router wybiera trasę między sieciami (warstwa 3, IP), switch wybiera port wg tablicy MAC (warstwa 2). Hub przesyła sygnał na wszystkie porty.", { src: "L-02 / wyjściówka 2.2" });
+q("urz", "Co to jest repeater (wzmacniak)?", "Urządzenie warstwy fizycznej, które regeneruje i wzmacnia sygnał, aby zwiększyć zasięg segmentu", ["Urządzenie wybierające trasę pakietów po adresach IP", "Przełącznik z tablicą adresów MAC", "Panel krosowniczy z gniazdami RJ-45"],
+  "C3 z wyjściówki 2.2. (Uzupełnienie – pojęcia nie ma w skryptach.)", { src: "wyjściówka 2.2" });
+q("urz", "W której z tych struktur sieci NIE spotyka się repeatera?", "w sieci opartej na przełącznikach i routerach (switch i router same regenerują sygnał)", ["w długim segmencie magistrali koncentrycznej", "w długim łączu skrętkowym przekraczającym 100 m", "w sieci z koncentratorem (hub to wieloportowy repeater)"],
+  "Repeater spotyka się tam, gdzie trzeba wydłużyć segment w warstwie fizycznej (magistrala, długie łącza, hub). (Uzupełnienie.)", { src: "wyjściówka 2.2" });
